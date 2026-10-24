@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/desktop.css">
+  <!-- Chart.js para estaciones de trabajo de escritorio -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Encabezado con navegación Desktop -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon">⚡</div>
+        <div>
+          <span class="brand-title">ServerCore Systems</span>
+          <span class="brand-subtitle">Estación de Gestión Datacenter [AWD Desktop]</span>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="/" class="nav-link">← Hub Principal</a>
+        <a href="/responsive" class="nav-link">RWD (Responsive)</a>
+        <a href="/adaptive" class="nav-link active">AWD Desktop</a>
+        <a href="/adaptive?view=mobile" class="nav-link" style="color: var(--brand-accent);">📱 Probar Vista Móvil</a>
+        <span class="mode-badge badge-awd">AWD: Desktop Template</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Banner con información del renderizado en servidor -->
+  <section class="hero-banner">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Catálogo de Servidores (AWD - Vista Desktop Especializada)</h1>
+        <p>Servidor Node.js detectó un cliente Desktop/Workstation. Renderizando plantilla dedicada <code>desktop.ejs</code> con telemetría completa.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <span>Cliente HTTP</span>
+          <strong><%= clientInfo.browser %> <%= clientInfo.version %> (<%= clientInfo.platform %>)</strong>
+        </div>
+        <div class="stat-pill">
+          <span>Componentes</span>
+          <strong id="desktopCountDisplay"><%= products.length %></strong>
+        </div>
+        <div class="stat-pill">
+          <span>Arquitectura</span>
+          <strong>AWD Server-Side SSR</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="awd-desktop-shell">
+    <!-- Barra lateral fija para Desktop -->
+    <aside class="awd-desktop-sidebar">
+      <div class="filter-header">
+        <h2 style="font-size: 1.1rem; font-weight: 700;">Filtros de Datacenter</h2>
+        <button class="filter-reset-btn" id="desktopResetBtn">Limpiar</button>
+      </div>
+
+      <div class="filter-group">
+        <h3 class="filter-group-title">Líneas de Producto</h3>
+        <ul class="filter-options-list">
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="desktop-filter-checkbox" value="processor">
+              <span>Procesadores High-Core</span>
+              <span class="filter-count">2</span>
+            </label>
+          </li>
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="desktop-filter-checkbox" value="gpu">
+              <span>Aceleradores Tensor/GPU</span>
+              <span class="filter-count">2</span>
+            </label>
+          </li>
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="desktop-filter-checkbox" value="storage">
+              <span>Almacenamiento NVMe Enterprise</span>
+              <span class="filter-count">3</span>
+            </label>
+          </li>
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="desktop-filter-checkbox" value="memory">
+              <span>Memoria Registered ECC</span>
+              <span class="filter-count">1</span>
+            </label>
+          </li>
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="desktop-filter-checkbox" value="networking">
+              <span>Interconexión 100GbE</span>
+              <span class="filter-count">1</span>
+            </label>
+          </li>
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="desktop-filter-checkbox" value="motherboard">
+              <span>Placas Servidor Dual Socket</span>
+              <span class="filter-count">1</span>
+            </label>
+          </li>
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="desktop-filter-checkbox" value="power">
+              <span>Fuentes 80+ Titanium</span>
+              <span class="filter-count">1</span>
+            </label>
+          </li>
+          <li>
+            <label class="filter-checkbox-label">
+              <input type="checkbox" class="desktop-filter-checkbox" value="cooling">
+              <span>Refrigeración Líquida Rack</span>
+              <span class="filter-count">1</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="filter-group">
+        <h3 class="filter-group-title">Rango de Inversión</h3>
+        <div class="filter-range-control">
+          <input type="range" class="filter-range-slider" id="desktopPriceSlider" min="500" max="35000" step="500" value="35000">
+          <div class="filter-range-values">
+            <span>$500 USD</span>
+            <span id="desktopPriceDisplay" style="color: var(--brand-accent); font-weight: bold;">$35,000 USD</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Grilla de productos Desktop -->
+    <section class="awd-desktop-grid" id="desktopProductsGrid">
+      <% products.forEach(function(product) { %>
+        <article class="product-card" data-category="<%= product.category %>" data-price="<%= product.price %>">
+          <div class="product-image-container">
+            <!-- Imagen desktop optimizada en WebP de alta fidelidad -->
+            <img 
+              class="product-image" 
+              src="<%= product.image %>?auto=format&fit=crop&w=1000&q=80&fm=webp" 
+              alt="<%= product.name %>" 
+              loading="lazy"
+              width="500"
+              height="312">
+            <span class="product-badge-overlay"><%= product.badge %></span>
+            <span class="product-category-overlay"><%= product.categoryLabel %></span>
+          </div>
+
+          <div class="product-body">
+            <h2 class="product-title"><%= product.name %></h2>
+            
+            <ul class="product-specs-list">
+              <% Object.keys(product.shortSpecs).forEach(function(k) { %>
+                <li class="spec-item">
+                  <span class="spec-label"><%= k %></span>
+                  <span class="spec-value"><%= product.shortSpecs[k] %></span>
+                </li>
+              <% }); %>
+            </ul>
+
+            <div class="product-footer">
+              <span class="product-price"><%= product.price %></span>
+              <button class="btn-buy" onclick="alert('Solicitud de compra generada para <%= product.name %>.')">
+                <span>Comprar</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      <% }); %>
+    </section>
+
+    <!-- Módulo Pesado de Comparativa (Solo entregado en desktop.ejs) -->
+    <section class="awd-desktop-benchmark-section">
+      <div style="margin-bottom: 1.5rem;">
+        <span class="mode-badge badge-awd">Módulo Exclusivo Desktop</span>
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-top: 0.5rem;">Dashboard de Benchmarks & Matriz de Especificaciones Extendidas</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Este bloque completo y la librería Chart.js se entregan únicamente a clientes Desktop mediante el servidor. 
+          A los clientes móviles se les entrega <code>mobile.ejs</code>, evitando la transferencia y procesamiento de estos recursos pesados.
+        </p>
+      </div>
+
+      <!-- Canvas de Chart.js -->
+      <div class="desktop-chart-container">
+        <canvas id="desktopBenchmarkCanvas"></canvas>
+      </div>
+
+      <!-- Matriz de Especificaciones Técnicas Exhaustivas -->
+      <div class="desktop-table-container">
+        <table class="desktop-specs-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Componente</th>
+              <th>Familia</th>
+              <th>Puntaje de Rendimiento</th>
+              <th>Matriz Detallada de Especificaciones de Arquitectura</th>
+              <th>Precio Unitario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach(function(product) { %>
+              <tr>
+                <td>#<%= product.id %></td>
+                <td style="font-weight: 700; color: #fff;"><%= product.name %></td>
+                <td><span class="specs-badge-tag"><%= product.categoryLabel %></span></td>
+                <td><strong style="color: var(--brand-accent);"><%= product.benchmarkMetric %></strong></td>
+                <td>
+                  <ul style="list-style: none; font-size: 0.8rem; line-height: 1.4;">
+                    <% product.fullSpecs.forEach(function(s) { %>
+                      <li><span style="color: #94a3b8;"><%= s.key %>:</span> <%= s.val %></li>
+                    <% }); %>
+                  </ul>
+                </td>
+                <td style="color: var(--brand-success); font-weight: bold; font-family: var(--font-mono); font-size: 1rem;"><%= product.price %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>AWD Desktop View: Plantilla especializada para pantallas grandes.</span>
+      <div class="footer-links">
+        <a href="/adaptive?view=mobile">Ver versión móvil adaptativa →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.__BENCHMARK_DATA__ = <%- JSON.stringify(products.map(function(p) {
+      return { id: p.id, name: p.name, benchmarkScore: p.benchmarkScore, metric: p.benchmarkMetric };
+    })) %>;
+  </script>
+  <script src="/js/desktop.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <!-- NOTA CRÍTICA AWD: NO se incluye Chart.js ni scripts pesados en la vista móvil -->
+</head>
+<body>
+
+  <!-- Encabezado Móvil Compacto -->
+  <header class="site-header">
+    <div class="header-container" style="padding: 0.6rem 1rem;">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon" style="width: 28px; height: 28px; font-size: 0.9rem;">⚡</div>
+        <div>
+          <span class="brand-title" style="font-size: 1rem;">ServerCore Mobile</span>
+          <span class="brand-subtitle" style="font-size: 0.65rem;">AWD: Plantilla Móvil Exclusiva</span>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="/adaptive?view=desktop" class="nav-link" style="font-size: 0.75rem; padding: 0.35rem 0.6rem;">💻 Ver Desktop</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="awd-mobile-container">
+    <!-- Banner de Información AWD -->
+    <div class="mobile-client-banner">
+      <div>
+        <span class="mobile-client-badge">AWD Server-Side</span>
+        <div class="mobile-client-info" style="margin-top: 0.25rem;">
+          DOM ligero • Sin gráfico pesado • Sin tabla masiva
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <span id="mobileCardCounter" style="font-size: 0.75rem; color: #fff; font-weight: 700;">
+          <%= products.length %> componentes
+        </span>
+      </div>
+    </div>
+
+    <!-- Filtro rápido por categorías en carrusel táctil (Píldoras) -->
+    <div class="mobile-category-scroll">
+      <button class="category-pill-btn active" data-category="all">Todos</button>
+      <button class="category-pill-btn" data-category="processor">Procesadores</button>
+      <button class="category-pill-btn" data-category="gpu">GPUs / AI</button>
+      <button class="category-pill-btn" data-category="storage">Almacenamiento</button>
+      <button class="category-pill-btn" data-category="memory">RAM ECC</button>
+      <button class="category-pill-btn" data-category="networking">Redes</button>
+      <button class="category-pill-btn" data-category="motherboard">Motherboards</button>
+      <button class="category-pill-btn" data-category="power">Fuentes</button>
+      <button class="category-pill-btn" data-category="cooling">Refrigeración</button>
+    </div>
+
+    <!-- Lista de 12 tarjetas optimizadas para móvil -->
+    <section class="awd-mobile-grid" id="mobileGrid">
+      <% products.forEach(function(product) { %>
+        <article class="mobile-card" data-category="<%= product.category %>">
+          <div class="mobile-card-img-wrap">
+            <!-- Imagen con ancho estrictamente adaptado a pantallas móviles (400px WebP) -->
+            <img 
+              class="mobile-card-img" 
+              src="<%= product.image %>?auto=format&fit=crop&w=400&q=70&fm=webp" 
+              alt="<%= product.name %>" 
+              loading="lazy"
+              width="400"
+              height="225">
+            <span class="product-badge-overlay" style="top: 0.5rem; left: 0.5rem; font-size: 0.65rem;">
+              <%= product.badge %>
+            </span>
+          </div>
+
+          <div class="mobile-card-content">
+            <div class="mobile-card-header">
+              <h2 class="mobile-card-title"><%= product.name %></h2>
+              <span class="mobile-card-price"><%= product.price %></span>
+            </div>
+
+            <!-- Resumen esencial de especificaciones (las exhaustivas no se envían al móvil) -->
+            <ul class="mobile-specs-compact">
+              <% Object.keys(product.shortSpecs).forEach(function(k) { %>
+                <li class="mobile-spec-row">
+                  <span class="mobile-spec-k"><%= k %></span>
+                  <span class="mobile-spec-v"><%= product.shortSpecs[k] %></span>
+                </li>
+              <% }); %>
+            </ul>
+
+            <button class="mobile-card-action">
+              + Agregar al Servidor
+            </button>
+          </div>
+        </article>
+      <% }); %>
+    </section>
+
+    <!-- Notificación explicativa de la optimización lograda -->
+    <div class="mobile-saving-notice">
+      <strong>⚡ Optimización AWD Comprobada:</strong>
+      El servidor omitió deliberadamente el gráfico interactivo de benchmarks (Chart.js) y la tabla de especificaciones completas de más de 72 filas en el HTML entregado. Esto reduce significativamente los bytes transferidos, el tiempo de parseo del DOM y el LCP en redes móviles restringidas (Fast 3G).
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding: 1.25rem 1rem; margin-top: 2rem;">
+    <div style="text-align: center; font-size: 0.75rem; color: var(--text-dim);">
+      <span>AWD Mobile View • <%= clientInfo.browser %> <%= clientInfo.version %></span>
+      <div style="margin-top: 0.5rem;">
+        <a href="/" style="color: var(--brand-accent); margin-right: 1rem;">Inicio</a>
+        <a href="/responsive" style="color: var(--brand-accent);">Versión RWD</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script ultra-ligero para móvil sin dependencias externas -->
+  <script src="/js/mobile.js"></script>
+</body>
+</html>

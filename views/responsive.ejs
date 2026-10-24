@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <!-- Chart.js cargado vía CDN abierta (requerido para el gráfico de benchmark en RWD) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Encabezado con navegación -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon">⚡</div>
+        <div>
+          <span class="brand-title">ServerCore Systems</span>
+          <span class="brand-subtitle">Catálogo Hardware para Datacenters & IA</span>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="/" class="nav-link">← Hub Principal</a>
+        <a href="/responsive" class="nav-link active">RWD (Responsive)</a>
+        <a href="/adaptive" class="nav-link">AWD (Adaptativo)</a>
+        <span class="mode-badge badge-rwd">Arquitectura RWD</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Banner con información del modo -->
+  <section class="hero-banner">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Catálogo de Componentes de Servidor (RWD)</h1>
+        <p>Mismo payload HTML para cualquier dispositivo. Diseño fluido con CSS Grid, Flexbox y elemento &lt;picture&gt;.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <span>Componentes</span>
+          <strong id="visibleProductsCount"><%= products.length %></strong>
+        </div>
+        <div class="stat-pill">
+          <span>Cliente Detectado</span>
+          <strong><%= deviceDetected %></strong>
+        </div>
+        <div class="stat-pill">
+          <span>Estrategia</span>
+          <strong>Fluid RWD Single Payload</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="layout-container">
+    <!-- Botón interactivo para colapsar filtros en móvil sin recargar la página -->
+    <button class="mobile-filter-trigger" id="mobileFilterTrigger" aria-label="Alternar filtros">
+      <span>⚙️ Filtrar y Comparar Componentes</span>
+      <span class="filter-icon">▼</span>
+    </button>
+
+    <div class="app-shell">
+      <!-- Barra lateral de filtros avanzados -->
+      <aside class="sidebar-filter-panel" id="sidebarFilterPanel">
+        <div class="filter-card">
+          <div class="filter-header">
+            <h2>Filtros Avanzados</h2>
+            <button class="filter-reset-btn" id="resetFiltersBtn">Restablecer</button>
+          </div>
+
+          <!-- Filtro por categoría -->
+          <div class="filter-group">
+            <h3 class="filter-group-title">Línea de Componente</h3>
+            <ul class="filter-options-list">
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox" value="processor">
+                  <span>Procesadores Servidor</span>
+                  <span class="filter-count">2</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox" value="gpu">
+                  <span>Aceleradores IA / GPU</span>
+                  <span class="filter-count">2</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox" value="storage">
+                  <span>Almacenamiento NVMe / RAID</span>
+                  <span class="filter-count">3</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox" value="memory">
+                  <span>Memoria Servidor ECC</span>
+                  <span class="filter-count">1</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox" value="networking">
+                  <span>Redes 100GbE</span>
+                  <span class="filter-count">1</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox" value="motherboard">
+                  <span>Placas Dual Socket</span>
+                  <span class="filter-count">1</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox" value="power">
+                  <span>Fuentes Redundantes</span>
+                  <span class="filter-count">1</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <input type="checkbox" class="filter-checkbox" value="cooling">
+                  <span>Refrigeración Líquida</span>
+                  <span class="filter-count">1</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Filtro de rango de precio -->
+          <div class="filter-group">
+            <h3 class="filter-group-title">Presupuesto Máximo</h3>
+            <div class="filter-range-control">
+              <input type="range" class="filter-range-slider" id="priceRangeSlider" min="500" max="35000" step="500" value="35000">
+              <div class="filter-range-values">
+                <span>$500 USD</span>
+                <span id="priceRangeCurrent" style="color: var(--brand-accent); font-weight: bold;">$35,000 USD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Micro-resumen en sidebar -->
+          <div style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.4; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+            <span>ℹ️ Enfoque RWD: Esta barra lateral colapsa mediante Flexbox/CSS sin recargar la página.</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Cuadrícula de 12 tarjetas de productos -->
+      <section class="products-grid" id="productsGrid">
+        <% products.forEach(function(product) { %>
+          <article class="product-card" data-category="<%= product.category %>" data-price="<%= product.price %>">
+            <!-- Optimización de imágenes mediante elemento <picture> y srcset con API Unsplash -->
+            <div class="product-image-container">
+              <picture>
+                <!-- Desktop (> 1024px): Imagen alta resolución 1200px WebP -->
+                <source 
+                  media="(min-width: 1025px)" 
+                  srcset="<%= product.image %>?auto=format&fit=crop&w=1200&q=80&fm=webp" 
+                  type="image/webp">
+                <!-- Tablet (640px - 1024px): Imagen media resolución 800px WebP -->
+                <source 
+                  media="(min-width: 640px)" 
+                  srcset="<%= product.image %>?auto=format&fit=crop&w=800&q=75&fm=webp" 
+                  type="image/webp">
+                <!-- Móvil (< 640px): Imagen baja resolución 400px WebP para ahorrar ancho de banda -->
+                <source 
+                  srcset="<%= product.image %>?auto=format&fit=crop&w=400&q=70&fm=webp" 
+                  type="image/webp">
+                <!-- Fallback estándar JPEG -->
+                <img 
+                  class="product-image" 
+                  src="<%= product.image %>?auto=format&fit=crop&w=800&q=75" 
+                  alt="<%= product.name %>" 
+                  loading="lazy"
+                  width="400"
+                  height="250">
+              </picture>
+              <span class="product-badge-overlay"><%= product.badge %></span>
+              <span class="product-category-overlay"><%= product.categoryLabel %></span>
+            </div>
+
+            <div class="product-body">
+              <h2 class="product-title"><%= product.name %></h2>
+              
+              <ul class="product-specs-list">
+                <% Object.keys(product.shortSpecs).forEach(function(k) { %>
+                  <li class="spec-item">
+                    <span class="spec-label"><%= k %></span>
+                    <span class="spec-value"><%= product.shortSpecs[k] %></span>
+                  </li>
+                <% }); %>
+              </ul>
+
+              <div class="product-footer">
+                <span class="product-price"><%= product.price %></span>
+                <button class="btn-buy" onclick="alert('Componente <%= product.name %> agregado a la orden de compra.')">
+                  <span>Cotizar</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        <% }); %>
+      </section>
+
+      <!-- Sección de Gráfico de Comparativa y Tabla Completa (Presente en el DOM de RWD) -->
+      <section class="benchmark-container">
+        <div class="benchmark-header">
+          <span class="benchmark-badge">Sobrecarga de Renderizado en RWD</span>
+          <h2>Telemetría y Comparativa de Rendimiento de Servidores</h2>
+          <p>
+            Gráfico interactivo de alta intensidad computacional y tabla de especificaciones completa.
+            En RWD puro, este bloque se descarga y viaja en el payload HTML hacia todos los clientes móviles,
+            incurriendo en sobrecarga de ancho de banda y procesamiento JS.
+          </p>
+        </div>
+
+        <!-- Canvas de Chart.js -->
+        <div class="chart-wrapper">
+          <canvas id="benchmarkChartCanvas"></canvas>
+        </div>
+
+        <!-- Tabla detallada de especificaciones técnicas completas -->
+        <div class="table-responsive-wrapper">
+          <table class="specs-comparison-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Componente</th>
+                <th>Categoría</th>
+                <th>Métrica de Rendimiento</th>
+                <th>Especificaciones Extendidas de Arquitectura</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% products.forEach(function(product) { %>
+                <tr>
+                  <td>#<%= product.id %></td>
+                  <td class="product-name-cell"><%= product.name %></td>
+                  <td><span class="specs-badge-tag"><%= product.categoryLabel %></span></td>
+                  <td><strong><%= product.benchmarkMetric %></strong> (Score: <%= product.benchmarkScore %>)</td>
+                  <td>
+                    <ul style="list-style: none; font-size: 0.8rem; line-height: 1.4;">
+                      <% product.fullSpecs.forEach(function(s) { %>
+                        <li><span style="color: #94a3b8;"><%= s.key %>:</span> <%= s.val %></li>
+                      <% }); %>
+                    </ul>
+                  </td>
+                  <td style="color: var(--brand-success); font-weight: bold; font-family: var(--font-mono);"><%= product.price %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>Versión RWD: 1 archivo HTML idéntico enviado a todos los clientes.</span>
+      <div class="footer-links">
+        <a href="/adaptive">Ir a Versión Adaptativa (AWD) →</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Serialización de datos de benchmark para Chart.js en RWD -->
+  <script>
+    window.__BENCHMARK_DATA__ = <%- JSON.stringify(products.map(function(p) {
+      return { id: p.id, name: p.name, benchmarkScore: p.benchmarkScore, metric: p.benchmarkMetric };
+    })) %>;
+  </script>
+  <script src="/js/responsive.js"></script>
+</body>
+</html>

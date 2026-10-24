@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Fase 3: Estilos para AWD Desktop (Adaptative Desktop View)
+   Optimizados exclusivamente para pantallas de alta resolución y clientes de escritorio
+   ========================================================================== */
+
+.awd-desktop-shell {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.awd-desktop-sidebar {
+  position: sticky;
+  top: 5.5rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.awd-desktop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.awd-badge-desktop {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.awd-desktop-benchmark-section {
+  grid-column: 1 / -1;
+  margin-top: 3rem;
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.desktop-chart-container {
+  height: 420px;
+  position: relative;
+  background-color: #0d131f;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 2rem;
+}
+
+.desktop-table-container {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-secondary);
+}
+
+.desktop-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.desktop-specs-table th {
+  background-color: #162032;
+  color: #f1f5f9;
+  padding: 0.85rem 1.25rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--brand-primary);
+}
+
+.desktop-specs-table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+.desktop-specs-table tr:hover td {
+  background-color: var(--bg-card-hover);
+  color: var(--text-main);
+}

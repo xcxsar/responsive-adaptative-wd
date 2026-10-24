@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/css/base.css">
+  <style>
+    .hub-hero {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.15) 0%, var(--bg-primary) 70%);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .hub-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 40%, var(--brand-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hub-subtitle {
+      max-width: 780px;
+      margin: 0 auto 2rem;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .detector-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      color: var(--brand-accent);
+      margin-bottom: 2rem;
+    }
+    .comparison-cards-grid {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .hub-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .hub-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--brand-accent);
+    }
+    .hub-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .hub-card-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-full);
+    }
+    .tag-rwd {
+      background-color: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .tag-awd {
+      background-color: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+    .hub-card-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .hub-card-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+    .hub-feature-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .hub-feature-item {
+      padding: 0.35rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hub-feature-item::before {
+      content: "✓";
+      color: var(--brand-accent);
+      font-weight: bold;
+    }
+    .hub-btn {
+      display: block;
+      text-align: center;
+      padding: 0.85rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .btn-rwd-primary {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #ffffff;
+    }
+    .btn-rwd-primary:hover {
+      background: linear-gradient(135deg, #047857, #059669);
+      color: #ffffff;
+    }
+    .btn-awd-primary {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #ffffff;
+    }
+    .btn-awd-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: #ffffff;
+    }
+    .awd-quick-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .awd-sub-btn {
+      flex: 1;
+      text-align: center;
+      font-size: 0.75rem;
+      padding: 0.4rem;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+    }
+    .awd-sub-btn:hover {
+      color: var(--brand-accent);
+      border-color: var(--brand-accent);
+    }
+    .concept-box {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 1.5rem;
+      background-color: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+    }
+    .concept-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brand-warning);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .concept-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon">⚡</div>
+        <div>
+          <span class="brand-title">ServerCore Engineering</span>
+          <span class="brand-subtitle">Laboratorio de Arquitectura Frontend: RWD vs. AWD</span>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="/" class="nav-link active">Inicio</a>
+        <a href="/responsive" class="nav-link">Versión RWD</a>
+        <a href="/adaptive" class="nav-link">Versión AWD</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hub-hero">
+      <div class="detector-badge">
+        <span>🔍 Agente Detectado:</span>
+        <strong><%= ua.browser %> <%= ua.version %> en <%= ua.os %></strong>
+        <span>(<%= ua.isMobile ? 'Dispositivo Móvil' : (ua.isTablet ? 'Tablet' : 'Desktop') %>)</span>
+      </div>
+
+      <h1 class="hub-title">Práctica: RWD vs. AWD en Arquitectura Web</h1>
+      <p class="hub-subtitle">
+        Evaluación de estrategias de entrega de interfaces web frente a clientes heterogéneos. 
+        Contraste empírico de tamaño de payload HTML, peticiones HTTP, tiempo de renderizado y Core Web Vitals en catálogo de infraestructura de servidores.
+      </p>
+    </section>
+
+    <div class="comparison-cards-grid">
+      <!-- Tarjeta RWD -->
+      <div class="hub-card">
+        <div class="hub-card-header">
+          <span class="hub-card-tag tag-rwd">Fase 2: RWD Puro</span>
+          <span class="mode-badge badge-rwd">Client-Side</span>
+        </div>
+        <h2 class="hub-card-title">Responsive Web Design</h2>
+        <p class="hub-card-desc">
+          El servidor entrega exactamente el mismo documento HTML a todos los dispositivos. 
+          La adaptación visual se realiza completamente en el motor de renderizado del navegador mediante CSS Grid, Flexbox y media queries fluidas.
+        </p>
+        <ul class="hub-feature-list">
+          <li>Un único archivo HTML consumido por cualquier cliente.</li>
+          <li>Media queries: Móvil (&lt;640px), Tablet (640-1024px), Desktop (&gt;1024px).</li>
+          <li>Elemento <code>&lt;picture&gt;</code> con <code>srcset</code> y formatos WebP optimizados.</li>
+          <li>Barra lateral colapsable fluidamente sin recargar la página.</li>
+          <li><strong>Sobrecarga:</strong> Todo el DOM (gráfico pesado Chart.js y tabla técnica) viaja a dispositivos móviles.</li>
+        </ul>
+        <a href="/responsive" class="hub-btn btn-rwd-primary">Abrir Versión RWD (/responsive) →</a>
+      </div>
+
+      <!-- Tarjeta AWD -->
+      <div class="hub-card">
+        <div class="hub-card-header">
+          <span class="hub-card-tag tag-awd">Fase 3: AWD Adaptativo</span>
+          <span class="mode-badge badge-awd">Server-Side SSR</span>
+        </div>
+        <h2 class="hub-card-title">Adaptive Web Design</h2>
+        <p class="hub-card-desc">
+          El servidor Node.js/Express inspecciona activamente la cabecera <code>User-Agent</code> y bifurca el renderizado entregando plantillas especializadas (<code>desktop.ejs</code> o <code>mobile.ejs</code>).
+        </p>
+        <ul class="hub-feature-list">
+          <li>Detección precisa de contexto de cliente en el servidor.</li>
+          <li>Plantilla móvil especializada sin el gráfico pesado ni la tabla extensa en el DOM inicial.</li>
+          <li>Exclusión de bibliotecas cliente pesadas (como Chart.js) en terminales móviles.</li>
+          <li>Payload inicial sustancialmente reducido para acelerar FCP, LCP y TTFB.</li>
+          <li>Cabecera HTTP <code>Vary: User-Agent</code> para sincronización con proxies y CDNs.</li>
+        </ul>
+        <a href="/adaptive" class="hub-btn btn-awd-primary">Abrir Versión AWD Automática (/adaptive) →</a>
+        <div class="awd-quick-links">
+          <a href="/adaptive?view=mobile" class="awd-sub-btn">📱 Forzar Vista Móvil</a>
+          <a href="/adaptive?view=desktop" class="awd-sub-btn">💻 Forzar Vista Desktop</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="concept-box">
+      <div class="concept-title">
+        <span>💡 Fundamento Técnico de Evaluación</span>
+      </div>
+      <p class="concept-text">
+        <strong>Ocultar con CSS <code>display: none</code> no evita la descarga de recursos:</strong> El navegador analiza el HTML, descubre las etiquetas de scripts y recursos referenciados, e inicia su descarga antes de procesar que un contenedor no debe pintarse. AWD mitiga este desperdicio evitando que dichos bytes viajen en el payload inicial.
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>Práctica de Laboratorio de Ingeniería Web: RWD vs. AWD</span>
+      <span>12 Componentes de Servidor de Alta Gama en Catálogo</span>
+    </div>
+  </footer>
+
+</body>
+</html>
