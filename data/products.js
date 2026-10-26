@@ -1,7 +1,7 @@
 /**
  * Catálogo de Hardware / Componentes de Servidor
  * 12 productos con especificaciones técnicas completas y métricas de benchmark
- * Las imágenes utilizan la API de Unsplash con parámetros de optimización dinámica (w, fm, q)
+ * Las imágenes son archivos locales servidos desde la carpeta /img
  */
 
 const products = [
@@ -12,7 +12,7 @@ const products = [
     categoryLabel: "Procesadores",
     badge: "96 Cores / 192 Threads",
     price: "$11,805 USD",
-    image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea",
+    image: "/img/AMD%20EPYC%E2%84%A2%209654%20Genoa.jpg",
     shortSpecs: {
       "Núcleos / Hilos": "96C / 192T",
       "Frecuencia Base / Boost": "2.40 GHz / 3.70 GHz",
@@ -37,7 +37,7 @@ const products = [
     categoryLabel: "Procesadores",
     badge: "Sapphire Rapids",
     price: "$17,000 USD",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+    image: "/img/Intel%C2%AE%20Xeon%C2%AE%20Platinum%208490H.jpg",
     shortSpecs: {
       "Núcleos / Hilos": "60C / 120T",
       "Frecuencia Base / Max Turbo": "1.90 GHz / 3.50 GHz",
@@ -62,7 +62,7 @@ const products = [
     categoryLabel: "Aceleradores & GPUs",
     badge: "Tensor Core Hopper",
     price: "$33,500 USD",
-    image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7",
+    image: "/img/NVIDIA%20H100%20SXM5%2080GB.avif",
     shortSpecs: {
       "VRAM": "80GB HBM3",
       "Ancho de Banda de Memoria": "3.35 TB/s",
@@ -87,7 +87,7 @@ const products = [
     categoryLabel: "Aceleradores & GPUs",
     badge: "Ampere Datacenter",
     price: "$14,800 USD",
-    image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97",
+    image: "/img/NVIDIA%20A100%20Tensor%20Core%2080GB.jpg",
     shortSpecs: {
       "VRAM": "80GB HBM2e",
       "Ancho de Banda": "2.0 TB/s",
@@ -112,7 +112,7 @@ const products = [
     categoryLabel: "Almacenamiento NVMe",
     badge: "PCIe Gen4 x4 Enterprise",
     price: "$2,290 USD",
-    image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b",
+    image: "/img/Samsung%20PM1733%2015.36TB%20NVMe%20U.2.jpg",
     shortSpecs: {
       "Capacidad": "15.36 TB",
       "Lectura Secuencial": "7,000 MB/s",
@@ -137,7 +137,7 @@ const products = [
     categoryLabel: "Almacenamiento NVMe",
     badge: "Alta Densidad QLC",
     price: "$5,100 USD",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31",
+    image: "/img/Solidigm%20D5-P5336%2061.44TB%20U.2.jpg",
     shortSpecs: {
       "Capacidad": "61.44 TB",
       "Lectura Secuencial": "7,000 MB/s",
@@ -162,7 +162,7 @@ const products = [
     categoryLabel: "Memoria Servidor",
     badge: "RDIMM 1Rx4 288-Pin",
     price: "$890 USD",
-    image: "https://images.unsplash.com/photo-1562976540-1502c2145186",
+    image: "/img/Micron%20128GB%20DDR5-4800%20ECC%20Reg.jpg",
     shortSpecs: {
       "Capacidad Módulo": "128 GB",
       "Velocidad de Datos": "4800 MT/s",
@@ -187,7 +187,7 @@ const products = [
     categoryLabel: "Redes e Interconexión",
     badge: "Dual-Port QSFP28 PCIe",
     price: "$1,120 USD",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8",
+    image: "/img/Broadcom%20NetXtreme-E%20100GbE%20NIC.jpg",
     shortSpecs: {
       "Puertos": "2x 100GbE QSFP28",
       "Throughput": "200 Gbps Bidireccional",
@@ -212,7 +212,7 @@ const products = [
     categoryLabel: "Placas Madre Servidor",
     badge: "Dual AMD Socket SP5",
     price: "$1,450 USD",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    image: "/img/Supermicro%20H13DSH%20Dual%20SP5%20Board.webp",
     shortSpecs: {
       "Sockets": "2x LGA 6096 (AMD EPYC 9004)",
       "Ranuras DIMM": "24x DDR5 (Hasta 6TB)",
@@ -237,7 +237,7 @@ const products = [
     categoryLabel: "Controladoras RAID",
     badge: "16 Puertos Tri-Mode PCIe 4.0",
     price: "$1,380 USD",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f",
+    image: "/img/LSI%20MegaRAID%209560-16i%20SAS_NVMe.jpg",
     shortSpecs: {
       "Puertos Internos": "16x SAS/SATA/NVMe Tri-Mode",
       "Caché Integrada": "8GB DDR4-2666 con CacheVault",
@@ -262,7 +262,7 @@ const products = [
     categoryLabel: "Fuentes Redundantes",
     badge: "80 PLUS Titanium 96%",
     price: "$620 USD",
-    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b",
+    image: "/img/Corsair%20AX1600i%20Titanium%201600W.jpg",
     shortSpecs: {
       "Potencia Continua": "1600 Watts",
       "Eficiencia": "80 PLUS Titanium (>96%)",
@@ -287,7 +287,7 @@ const products = [
     categoryLabel: "Refrigeración Líquida Servidor",
     badge: "Compresor 1500W TDP",
     price: "$1,690 USD",
-    image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c",
+    image: "/img/Alphacool%20Eiszeit%202000%20Chiller.jpg",
     shortSpecs: {
       "Capacidad de Enfriamiento": "1500W Continuos",
       "Bomba Integrada": "Caudal de 600 L/h (Altura 10m)",

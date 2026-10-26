@@ -44,7 +44,9 @@
   padding: 0;
 }
 
+html,
 body {
+  overflow-x: hidden;
   font-family: var(--font-sans);
   background-color: var(--bg-primary);
   color: var(--text-main);
@@ -87,6 +89,7 @@ a:hover {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  width: 100%;
 }
 
 .brand-wrapper {
@@ -126,6 +129,8 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .nav-link {
@@ -159,6 +164,9 @@ a:hover {
   letter-spacing: 0.05em;
   background-color: var(--border-color);
   color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 100%;
 }
 
 .mode-badge.badge-rwd {

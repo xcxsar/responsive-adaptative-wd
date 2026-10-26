@@ -56,6 +56,7 @@
   </section>
 
   <main class="awd-desktop-shell">
+    <div class="awd-desktop-layout">
     <!-- Barra lateral fija para Desktop -->
     <aside class="awd-desktop-sidebar">
       <div class="filter-header">
@@ -142,14 +143,14 @@
       <% products.forEach(function(product) { %>
         <article class="product-card" data-category="<%= product.category %>" data-price="<%= product.price %>">
           <div class="product-image-container">
-            <!-- Imagen desktop optimizada en WebP de alta fidelidad -->
+            <!-- Imagen local recortada a relación de aspecto 16:10 -->
             <img 
               class="product-image" 
-              src="<%= product.image %>?auto=format&fit=crop&w=1000&q=80&fm=webp" 
+              src="<%= product.image %>" 
               alt="<%= product.name %>" 
               loading="lazy"
-              width="500"
-              height="312">
+              width="800"
+              height="500">
             <span class="product-badge-overlay"><%= product.badge %></span>
             <span class="product-category-overlay"><%= product.categoryLabel %></span>
           </div>
@@ -177,6 +178,7 @@
         </article>
       <% }); %>
     </section>
+    </div>
 
     <!-- Módulo Pesado de Comparativa (Solo entregado en desktop.ejs) -->
     <section class="awd-desktop-benchmark-section">

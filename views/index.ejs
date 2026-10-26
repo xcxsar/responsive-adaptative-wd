@@ -230,8 +230,8 @@
         <ul class="hub-feature-list">
           <li>Un único archivo HTML consumido por cualquier cliente.</li>
           <li>Media queries: Móvil (&lt;640px), Tablet (640-1024px), Desktop (&gt;1024px).</li>
-          <li>Elemento <code>&lt;picture&gt;</code> con <code>srcset</code> y formatos WebP optimizados.</li>
-          <li>Barra lateral colapsable fluidamente sin recargar la página.</li>
+          <li>Imágenes locales en <code>/img</code> con recorte uniforme 16:10.</li>
+          <li>Cuadrícula fluida de 1, 2 y 3 columnas según el viewport.</li>
           <li><strong>Sobrecarga:</strong> Todo el DOM (gráfico pesado Chart.js y tabla técnica) viaja a dispositivos móviles.</li>
         </ul>
         <a href="/responsive" class="hub-btn btn-rwd-primary">Abrir Versión RWD (/responsive) →</a>
@@ -260,15 +260,6 @@
           <a href="/adaptive?view=desktop" class="awd-sub-btn">💻 Forzar Vista Desktop</a>
         </div>
       </div>
-    </div>
-
-    <div class="concept-box">
-      <div class="concept-title">
-        <span>💡 Fundamento Técnico de Evaluación</span>
-      </div>
-      <p class="concept-text">
-        <strong>Ocultar con CSS <code>display: none</code> no evita la descarga de recursos:</strong> El navegador analiza el HTML, descubre las etiquetas de scripts y recursos referenciados, e inicia su descarga antes de procesar que un contenedor no debe pintarse. AWD mitiga este desperdicio evitando que dichos bytes viajen en el payload inicial.
-      </p>
     </div>
   </main>
 

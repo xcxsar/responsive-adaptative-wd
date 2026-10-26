@@ -12,6 +12,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Middleware para servir recursos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
+// Imágenes locales del catálogo (carpeta /img en la raíz del proyecto)
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
 // Middleware de detección de cliente HTTP (User-Agent)
 app.use(useragent.express());
@@ -40,8 +42,7 @@ app.get('/', (req, res) => {
  * Fase 2: Implementación Versión A (RWD - Responsive Web Design)
  * - Un único archivo HTML consumido por cualquier cliente.
  * - CSS Grid & Flexbox con media queries fluidas (<640px, 640px-1024px, >1024px).
- * - Elemento <picture> con srcset para WebP/resoluciones adaptables.
- * - Sidebar colapsable fluidamente en pantallas móviles sin recargar la página.
+ * - Imágenes locales con relación de aspecto uniforme 16:10.
  * - Incluye todo el contenido en el DOM (gráfico pesado Chart.js y tabla técnica completa).
  */
 app.get('/responsive', (req, res) => {

@@ -7,6 +7,10 @@
   max-width: 1560px;
   margin: 0 auto;
   padding: 2rem;
+  display: block;
+}
+
+.awd-desktop-layout {
   display: grid;
   grid-template-columns: 340px 1fr;
   gap: 2.5rem;
@@ -14,6 +18,7 @@
 }
 
 .awd-desktop-sidebar {
+  align-self: start;
   position: sticky;
   top: 5.5rem;
   background-color: var(--bg-card);

@@ -42,32 +42,19 @@
       </div>
     </div>
 
-    <!-- Filtro rápido por categorías en carrusel táctil (Píldoras) -->
-    <div class="mobile-category-scroll">
-      <button class="category-pill-btn active" data-category="all">Todos</button>
-      <button class="category-pill-btn" data-category="processor">Procesadores</button>
-      <button class="category-pill-btn" data-category="gpu">GPUs / AI</button>
-      <button class="category-pill-btn" data-category="storage">Almacenamiento</button>
-      <button class="category-pill-btn" data-category="memory">RAM ECC</button>
-      <button class="category-pill-btn" data-category="networking">Redes</button>
-      <button class="category-pill-btn" data-category="motherboard">Motherboards</button>
-      <button class="category-pill-btn" data-category="power">Fuentes</button>
-      <button class="category-pill-btn" data-category="cooling">Refrigeración</button>
-    </div>
-
     <!-- Lista de 12 tarjetas optimizadas para móvil -->
     <section class="awd-mobile-grid" id="mobileGrid">
       <% products.forEach(function(product) { %>
         <article class="mobile-card" data-category="<%= product.category %>">
           <div class="mobile-card-img-wrap">
-            <!-- Imagen con ancho estrictamente adaptado a pantallas móviles (400px WebP) -->
+            <!-- Imagen local recortada a la misma relación de aspecto 16:10 que el resto de vistas -->
             <img 
               class="mobile-card-img" 
-              src="<%= product.image %>?auto=format&fit=crop&w=400&q=70&fm=webp" 
+              src="<%= product.image %>" 
               alt="<%= product.name %>" 
               loading="lazy"
-              width="400"
-              height="225">
+              width="800"
+              height="500">
             <span class="product-badge-overlay" style="top: 0.5rem; left: 0.5rem; font-size: 0.65rem;">
               <%= product.badge %>
             </span>
